@@ -5,8 +5,8 @@ app = Flask(__name__)
 #rutas
 @app.route("/")
 def index():
-    ruta = os.path.join(app.static_folder, 'image')
-    imagenes = [url_for('static', filename=f'image/{img}') for img in os.listdir(ruta) if img.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
+    ruta = os.path.join(app.static_folder, 'img')
+    imagenes = [url_for('static', filename=f'img/{img}') for img in os.listdir(ruta) if img.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
     return render_template("index.html", imagenes=imagenes)
 
 #ejecutar mi servidor
