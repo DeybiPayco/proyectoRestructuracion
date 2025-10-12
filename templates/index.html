@@ -115,15 +115,13 @@
                     <p class="text-gray-600 mt-2">Dinos un poco de ti para enviarte ofertas exclusivas.</p>
                 </div>
 
-                {% with messages = get_flashed_messages(with_categories=true) %}
-                    {% if messages %}
-                        {% for category, message in messages %}
-                            <div id="flash-message" class="p-4 mb-6 text-lg font-medium text-green-700 bg-green-100 rounded-lg shadow-lg animate-on-scroll is-visible" role="alert">
-                                {{ message }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                {% endwith %}
+                <!-- ===== MODIFICACIÓN 1: Contenedor para la respuesta del formulario ===== -->
+                <!-- Este div reemplaza tu bloque de 'get_flashed_messages'. Es más simple y lo controlaremos con JS. -->
+                <div id="mensaje-respuesta" 
+                     class="hidden p-4 mb-6 text-lg font-medium text-green-700 bg-green-100 rounded-lg shadow-lg" 
+                     role="alert">
+                    <!-- El mensaje de éxito aparecerá aquí -->
+                </div>
 
                 <div id="boton-mostrar-form" class="animate-on-scroll">
                     <button id="btn-mostrar"
@@ -208,51 +206,84 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Lógica para mostrar/ocultar el formulario
+            // Lógica para mostrar/ocultar el formulario (esta parte no se ha cambiado)
             const btnMostrar = document.getElementById('btn-mostrar');
             const formulario = document.getElementById('formulario-oculto');
             const contenedorBoton = document.getElementById('boton-mostrar-form');
+            const mensajeRespuesta = document.getElementById('mensaje-respuesta');
 
             if (btnMostrar && formulario) {
                 btnMostrar.addEventListener('click', () => {
-                    // Oculta el botón
                     contenedorBoton.classList.add('hidden'); 
-                    
-                    // Muestra el formulario
                     formulario.classList.remove('hidden'); 
-                    
-                    // Activa la animación del formulario (si aún no se ha activado)
                     formulario.classList.add('is-visible');
+                    formulario.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            }
+            
+            // ===== MODIFICACIÓN 2: Se añade la lógica para enviar el formulario sin recargar la página =====
+            if (formulario) {
+                formulario.addEventListener('submit', function(event) {
+                    event.preventDefault(); // ¡La línea más importante! Evita la recarga.
 
-                    // Desplázate suavemente al formulario
-                    formulario.scrollIntoView({ behavior: 'smooth', block: 'start', offset: -100 });
+                    // Creamos un objeto FormData para recopilar todos los datos del formulario.
+                    const formData = new FormData(formulario);
+
+                    // Usamos fetch para enviar los datos al servidor en segundo plano.
+                    fetch("{{ url_for('manejar_formulario') }}", {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json()) // Convertimos la respuesta del servidor a JSON.
+                    .then(data => {
+                        // Verificamos si la respuesta del servidor fue exitosa.
+                        if (data.status === 'success') {
+                            // 1. Ocultamos el formulario.
+                            formulario.classList.add('hidden');
+                            
+                            // 2. Insertamos el mensaje de éxito (que viene del servidor) en nuestro contenedor.
+                            mensajeRespuesta.textContent = data.message;
+                            
+                            // 3. Mostramos el contenedor del mensaje.
+                            mensajeRespuesta.classList.remove('hidden');
+                            
+                            // 4. Activamos la animación para el contenedor del mensaje.
+                            mensajeRespuesta.classList.add('animate-on-scroll', 'is-visible');
+                            
+                            // 5. Nos aseguramos de que el usuario vea el mensaje.
+                            mensajeRespuesta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        } else {
+                            // Si el servidor indica un error, lo mostramos en una alerta.
+                            alert('Error: ' + data.message);
+                        }
+                    })
+                    .catch(error => {
+                        // Esto captura errores de red (si el servidor no responde).
+                        console.error('Error de red:', error);
+                        alert('No se pudo conectar con el servidor. Inténtalo de nuevo más tarde.');
+                    });
                 });
             }
 
-            // --- LÓGICA DE TU CÓDIGO DE ANIMACIÓN EXISTENTE (Intersection Observer) ---
+            // Lógica de animación de scroll (esta parte no se ha cambiado)
             const animatedElements = document.querySelectorAll('.animate-on-scroll');
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Solo añadimos la clase 'is-visible' si no tiene la clase 'hidden'
-                        // y si aún no la tiene.
                         if (!entry.target.classList.contains('hidden')) {
                              entry.target.classList.add('is-visible');
-                             // Deja de observar el elemento una vez que ha aparecido
                              observer.unobserve(entry.target); 
                         }
                     }
                 });
             }, {
-                threshold: 0.1 // La animación se dispara cuando el 10% del elemento es visible
+                threshold: 0.1
             });
-
             animatedElements.forEach(element => {
                 observer.observe(element);
             });
-            // ----------------------------------------------------
         });
     </script>
 </body>
 </html>
+

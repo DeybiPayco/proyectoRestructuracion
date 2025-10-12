@@ -1,58 +1,72 @@
-from flask import Flask, render_template, url_for, request, redirect, flash
+# 1. Importaciones necesarias
+# Añadimos jsonify para la respuesta AJAX y mysql.connector para la base de datos.
+from flask import Flask, render_template, url_for, request, jsonify
 import os
+import mysql.connector
+from config import db_config  # Importamos la configuración de la base de datos
 
 # Inicializar la aplicacion en flask
 app = Flask(__name__)
 
-# Necesario para usar flash messages (mensajes temporales)
-# ¡IMPORTANTE!: CAMBIA 'tu_clave_secreta_aqui' por una cadena aleatoria y compleja en producción
-app.secret_key = 'una_clave_secreta_super_segura_y_unica' 
+# La clave secreta ya no es necesaria si no usamos flash, la he comentado.
+# app.secret_key = 'una_clave_secreta_super_segura_y_unica' 
 
-
-# Rutas
-
+# Ruta principal que muestra la página
 @app.route("/")
 def index():
-    # Lógica para cargar imágenes
-    ruta = os.path.join(app.root_path, 'static', 'img')
-    
+    # Tu lógica mejorada para cargar imágenes (¡está muy bien!)
+    ruta_imagenes = os.path.join(app.static_folder, 'img')
     imagenes = []
-    if os.path.exists(ruta):
+    if os.path.exists(ruta_imagenes):
         imagenes = [url_for('static', filename=f'img/{img}') 
-                    for img in os.listdir(ruta) 
+                    for img in os.listdir(ruta_imagenes) 
                     if img.lower().endswith(('.png', '.jpg', '.jpeg', '.gif'))]
-        
-    # Renderizamos la plantilla con las imágenes y los mensajes flash disponibles
+            
     return render_template("index.html", imagenes=imagenes)
 
+# Ruta para procesar el formulario enviado por JavaScript
 @app.route('/enviar_formulario', methods=['POST'])
 def manejar_formulario():
     if request.method == 'POST':
-        
         # 1. Capturar los datos del formulario
         nombre = request.form.get('nombre')
         email = request.form.get('email')
         preferencia = request.form.get('preferencia')
         ocasion = request.form.get('ocasion')
         
-        # 2. Lógica de Negocio (Guardar datos)
-        print("--- NUEVO CLIENTE REGISTRADO ---")
-        print(f"Nombre: {nombre}, Email: {email}")
-        print(f"Preferencia: {preferencia}, Ocasion: {ocasion}")
-        # Aquí se simula el guardado.
-        
-        # 3. Mostrar el mensaje de agradecimiento
-        # flash('El mensaje', 'categoría') - 'success' es una categoría común, aunque no se usa aquí.
-        flash(f'¡Gracias, {nombre}! Tus preferencias han sido guardadas. Revisa tu correo, ¡te espera un descuento!', 'success')
-        
-        # 4. Redirigir a la página principal (PRG pattern)
-        # Esto hace que el usuario vea la página principal con el mensaje de éxito.
-        return redirect(url_for('index'))
+        # 2. Conectar y guardar en la base de datos
+        try:
+            conn = mysql.connector.connect(**db_config)
+            cursor = conn.cursor()
+            
+            query = "INSERT INTO clientes (nombre, email, preferencia, ocasion) VALUES (%s, %s, %s, %s)"
+            values = (nombre, email, preferencia, ocasion)
+            
+            cursor.execute(query, values)
+            conn.commit()
+            
+            # 3. Preparar el mensaje de éxito personalizado
+            primer_nombre = nombre.split()[0] if nombre else "Amigo(a)"
+            mensaje_exito = f"¡Gracias, {primer_nombre}! Tus preferencias han sido guardadas. Revisa tu correo, ¡te espera un descuento!"
+            
+            # 4. Enviar respuesta JSON al front-end (en lugar de flash y redirect)
+            return jsonify({'status': 'success', 'message': mensaje_exito})
+
+        except mysql.connector.Error as err:
+            print(f"Error al conectar con la base de datos: {err}")
+            return jsonify({'status': 'error', 'message': 'No pudimos guardar tus datos. Inténtalo más tarde.'}), 500
+            
+        finally:
+            if 'cursor' in locals() and cursor is not None:
+                cursor.close()
+            if 'conn' in locals() and conn.is_connected():
+                conn.close()
     
-    return redirect(url_for('index'))
+    # Si la petición no es POST, simplemente no hacemos nada visible para el usuario.
+    return jsonify({'status': 'error', 'message': 'Método no permitido.'}), 405
 
 
 # Ejecutar mi servidor
 if __name__ == '__main__':
-    # Usar el puerto 5000 por defecto
     app.run(debug=True)
+
