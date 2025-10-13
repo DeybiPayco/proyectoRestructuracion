@@ -4,8 +4,38 @@
 
 {% block content %}
 <main>
-    <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-        <div class="bg-black/40 p-8 md:p-12 rounded-lg text-center text-white max-w-3xl mx-4 animate-on-scroll">
+    <section class="relative h-screen flex items-center justify-center overflow-hidden" id="hero-carousel">
+        
+        <div id="carousel-images" class="absolute inset-0">
+            <div class="carousel-item absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" 
+                 data-img-url="https://i.pinimg.com/736x/d0/dc/07/d0dc07c85d55ecc045355cf2ccaa0d2a.jpg"
+                 style="background-image: url('https://i.pinimg.com/736x/d0/dc/07/d0dc07c85d55ecc045355cf2ccaa0d2a.jpg');">
+            </div>
+            
+            <div class="carousel-item absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" 
+                 data-img-url="https://i.pinimg.com/736x/f0/2a/3b/f02a3bb79111234c586eafe6626d54b5.jpg"
+                 style="background-image: url('https://i.pinimg.com/736x/f0/2a/3b/f02a3bb79111234c586eafe6626d54b5.jpg');">
+            </div>
+            
+            <div class="carousel-item absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" 
+                 data-img-url="https://i.pinimg.com/1200x/d3/51/fc/d351fcb99034b428a079ceb90ec67a06.jpg"
+                 style="background-image: url('https://i.pinimg.com/1200x/d3/51/fc/d351fcb99034b428a079ceb90ec67a06.jpg');">
+            </div>
+            
+            <div class="carousel-item absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" 
+                 data-img-url="https://i.pinimg.com/736x/f6/43/5f/f6435f9f269a508f0768d8311c00ce18.jpg"
+                 style="background-image: url('https://i.pinimg.com/736x/f6/43/5f/f6435f9f269a508f0768d8311c00ce18.jpg');">
+            </div>
+
+            <div class="carousel-item absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out opacity-0" 
+                 data-img-url="https://i.pinimg.com/736x/62/48/eb/6248eb9693903a495a5b6894ed56b028.jpg"
+                 style="background-image: url('https://i.pinimg.com/736x/62/48/eb/6248eb9693903a495a5b6894ed56b028.jpg');">
+            </div>
+        </div>
+
+        <div class="absolute inset-0 bg-black/40"></div>
+
+        <div class="relative z-10 bg-black/40 p-8 md:p-12 rounded-lg text-center text-white max-w-3xl mx-4 animate-on-scroll">
             <h1 class="text-5xl md:text-7xl font-bold mb-4">El Sabor de la Felicidad</h1>
             <p class="text-lg md:text-xl mb-8">Pasteles y postres artesanales hechos con amor y los mejores ingredientes.</p>
             <a href="#productos" class="bg-white text-pink-600 font-bold px-8 py-3 rounded-full text-lg hover:bg-stone-200 transition duration-300 transform hover:scale-105">
@@ -13,7 +43,6 @@
             </a>
         </div>
     </section>
-
     <section id="productos" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-12 animate-on-scroll">
@@ -98,13 +127,13 @@
                 <div class="animate-on-scroll" style="transition-delay: 200ms;">
                     <label for="nombre" class="block text-left text-base font-medium text-gray-700 mb-1">Tu Nombre Completo</label>
                     <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana María Rojas" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
                 </div>
 
                 <div class="animate-on-scroll" style="transition-delay: 300ms;">
                     <label for="email" class="block text-left text-base font-medium text-gray-700 mb-1">Correo Electrónico</label>
                     <input type="email" id="email" name="email" placeholder="para recibir tus ofertas exclusivas" required
-                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
                 </div>
 
                 <div class="animate-on-scroll" style="transition-delay: 400ms;">
