@@ -28,7 +28,7 @@
             
             <div class="hidden md:flex items-center space-x-8 lg:space-x-12">
                 
-                <a href="/#productos" class="relative text-gray-700 hover:text-pink-700 font-semibold transition duration-300 flex items-center space-x-1 link-hover-magic">
+                <a href="{{ url_for('productos') }}" class="relative text-gray-700 hover:text-pink-700 font-semibold transition duration-300 flex items-center space-x-1 link-hover-magic">
                     <ion-icon name="fast-food" class="text-xl"></ion-icon>
                     <span>Productos</span>
                 </a>
@@ -113,11 +113,11 @@
                     </h3>
                     <p class="text-slate-600 text-sm italic">Elaboramos felicidad en cada detalle.</p>
                 </div>
-                
+
                 <div class="text-center">
                     <h4 class="text-xl font-bold mb-4 text-pink-700 border-b-2 border-pink-400 inline-block pb-1" style="font-family: 'Playfair Display', serif;">Menú Rápido</h4>
                     <ul class="space-y-3">
-                        <li><a href="/#productos" class="text-slate-600 hover:text-pink-600 transition duration-300 transform hover:translate-x-1 block">Productos</a></li>
+                        <li><a href="{{ url_for('productos') }}" class="text-slate-600 hover:text-pink-600 transition duration-300 transform hover:translate-x-1 block">Productos</a></li>
                         <li><a href="/#nosotros" class="text-slate-600 hover:text-pink-600 transition duration-300 transform hover:translate-x-1 block">Nuestra Historia</a></li>
                         <li><a href="/#contacto" class="text-slate-600 hover:text-pink-600 transition duration-300 transform hover:translate-x-1 block">Contáctanos</a></li>
                     </ul>
@@ -144,7 +144,6 @@
     </footer>
 
     <script>
-        // Definimos la variable global para que no de error en otras páginas
         const FORM_URL = "{{ url_for('manejar_formulario', _external=True) }}"; 
     </script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
