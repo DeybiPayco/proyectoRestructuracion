@@ -1,19 +1,50 @@
-/* Agregamos las tipografías personalizadas a Tailwind  */
+/* Agregamos las tipografías personalizadas a Tailwind  */
 body {
-    font-family: 'Inter', sans-serif;
+ font-family: 'Inter', sans-serif;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+ font-family: 'Playfair Display', serif;
 }
 
-/* Estilos para las animaciones al hacer scroll */
+
 .animate-on-scroll {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+ opacity: 0;
+ transform: translateY(20px);
+ transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 .animate-on-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
+ opacity: 1;
+ transform: translateY(0);
+}
+
+/* 1. Subrayado Mágico (Deslizante) para enlaces de navegación */
+.link-hover-magic::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: -8px; /* Separación del texto de la línea de la barra */
+    left: 0;
+    background-color: #EC4899; /* pink-500 */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.link-hover-magic:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* 2. Animación de Sombra Palpitante para el botón de pedido */
+@keyframes pulse-shadow {
+  0%, 100% {
+    /* Sombra inicial - pink-400/50 */
+    box-shadow: 0 10px 15px -3px rgba(244, 114, 182, 0.5), 0 4px 6px -2px rgba(244, 114, 182, 0.05); 
+  }
+  50% {
+    /* Sombra más fuerte y extendida - pink-400/80 */
+    box-shadow: 0 15px 20px -3px rgba(244, 114, 182, 0.8), 0 6px 8px -2px rgba(244, 114, 182, 0.1); 
+  }
 }
