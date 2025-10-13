@@ -1,123 +1,36 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menú Completo | Pastelería Dulce Rincón</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-    
-</head>
-<body class="bg-stone-50 text-slate-800">
+{% extends "base.html" %}
 
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="{{ url_for('index') }}" class="text-2xl font-bold text-pink-600">Dulce Rincón</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="{{ url_for('index') }}#productos" class="text-gray-600 hover:text-pink-500 transition duration-300">Productos</a>
-                <a href="{{ url_for('index') }}#nosotros" class="text-gray-600 hover:text-pink-500 transition duration-300">Nosotros</a>
-                <a href="{{ url_for('index') }}#contacto" class="text-gray-600 hover:text-pink-500 transition duration-300">Contacto</a>
-            </div>
-            <a href="{{ url_for('index') }}#contacto" class="hidden md:block bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105">
-                ¡Haz tu pedido!
-            </a>
-        </nav>
-    </header>
+{% block title %}Nuestro Menú - Dulce Rincón{% endblock %}
 
-    <main class="py-16">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-12">
-                <h1 class="text-5xl font-bold text-slate-800">Nuestro Menú Completo</h1>
-                <p class="text-gray-600 mt-3 text-lg">Explora todas nuestras delicias, precios y opciones de compra.</p>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-                
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-pink-100 transform hover:scale-[1.02] transition-all duration-300">
-                    <img src="{{ url_for('static', filename='img/1.jpg') }}" alt="Pastel de Frambuesa" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-2 uppercase">Pasteles</span>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Tarta de Frambuesa</h2>
-                        <p class="text-gray-600 text-sm mb-4 h-12 overflow-hidden">Delicada tarta con crema pastelera y una cubierta de frambuesas frescas.</p>
-                        
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-2xl font-extrabold text-pink-600">s/22.99</span>
-                            <button class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">
-                                ¡Comprar!
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-pink-100 transform hover:scale-[1.02] transition-all duration-300">
-                    <img src="{{ url_for('static', filename='img/2.jpg') }}" alt="Galletas de Chispas" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-2 uppercase">Galletas</span>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Galletas de Doble Chocolate</h2>
-                        <p class="text-gray-600 text-sm mb-4 h-12 overflow-hidden">Suaves por dentro, crujientes por fuera, con chispas de chocolate blanco y negro.</p>
-                        
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-2xl font-extrabold text-pink-600">s/4.50 (Unidad)</span>
-                            <button class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">
-                                ¡Comprar!
-                            </button>
-                        </div>
-                    </div>
-                </div>
+{% block content %}
+<div class="bg-white">
+    <div class="container mx-auto px-6 py-12 md:py-20">
 
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-pink-100 transform hover:scale-[1.02] transition-all duration-300">
-                    <img src="{{ url_for('static', filename='img/3.jpg') }}" alt="Tiramisú" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-2 uppercase">Postres Fríos</span>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Tiramisú Clásico</h2>
-                        <p class="text-gray-600 text-sm mb-4 h-12 overflow-hidden">Capas de mascarpone cremoso, café expreso y un toque de cacao.</p>
-                        
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-2xl font-extrabold text-pink-600">s/8.99 (Porción)</span>
-                            <button class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">
-                                ¡Comprar!
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-xl overflow-hidden border border-pink-100 transform hover:scale-[1.02] transition-all duration-300">
-                    <img src="{{ url_for('static', filename='img/4.jpg') }}" alt="Cupcake" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="inline-block bg-pink-100 text-pink-700 text-xs font-semibold px-3 py-1 rounded-full mb-2 uppercase">Cupcakes</span>
-                        <h2 class="text-2xl font-bold text-slate-800 mb-2">Tiramisu de Fresa</h2>
-                        <p class="text-gray-600 text-sm mb-4 h-12 overflow-hidden">El tiramisu más esponjoso, cubierto con fresas.</p>
-                        
-                        <div class="flex justify-between items-center mt-4">
-                            <span class="text-2xl font-extrabold text-pink-600">s/3.50 (Unidad)</span>
-                            <button class="bg-pink-500 text-white px-5 py-2 rounded-full hover:bg-pink-600 transition duration-300 shadow-md">
-                                ¡Comprar!
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            <div class="text-center mt-16">
-                <a href="{{ url_for('index') }}" class="text-pink-600 hover:text-pink-800 font-medium transition duration-300">
-                    &larr; Volver al Inicio
-                </a>
-            </div>
+        <div class="text-center mb-12 animate-on-scroll">
+            <h1 class="text-4xl md:text-5xl font-bold text-slate-800" style="font-family: 'Playfair Display', serif;">Nuestro Menú Completo</h1>
+            <p class="text-gray-600 mt-3 text-lg">Descubre todas las delicias que preparamos con amor para ti.</p>
         </div>
-    </main>
 
-    <footer class="bg-slate-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Pastelería Dulce Rincón. Todos los derechos reservados.</p>
-            <p class="text-sm text-slate-400 mt-2">Diseñado con amor y mucho azúcar.</p>
-        </div>
-    </footer>
-    
-</body>
-</html>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+
+            {% for producto in productos %}
+            <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll">
+                <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="w-full h-56 object-cover">
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">{{ producto.nombre }}</h3>
+                    <p class="text-gray-600 text-sm mb-4">{{ producto.descripcion }}</p>
+                    <div class="flex justify-between items-center">
+                        <span class="font-bold text-xl text-pink-600">S/ {{ "%.2f"|format(producto.precio) }}</span>
+                        <a href="#" class="bg-pink-500 text-white px-4 py-2 text-sm font-semibold rounded-full hover:bg-pink-600 transition duration-200">Añadir</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-span-full text-center py-10 text-gray-500">
+                <p>¡Oh no! Parece que aún no hemos añadido productos. Vuelve pronto.</p>
+            </div>
+            {% endfor %}
+            </div>
+    </div>
+</div>
+{% endblock %}

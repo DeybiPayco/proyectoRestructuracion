@@ -1,199 +1,154 @@
-<!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pastelería Dulce Rincón - Postres Artesanales</title>
+{% extends "base.html" %}
 
-    <script src="https://cdn.tailwindcss.com"></script>
+{% block title %}Pastelería Dulce Rincón - Inicio{% endblock %}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/output.css') }}">
-    
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
-    
-</head>
-<body class="bg-stone-50 text-slate-800">
-
-    <header class="bg-white/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-pink-600">Dulce Rincón</a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#productos" class="text-gray-600 hover:text-pink-500 transition duration-300">Productos</a>
-                <a href="#nosotros" class="text-gray-600 hover:text-pink-500 transition duration-300">Nosotros</a>
-                <a href="#contacto" class="text-gray-600 hover:text-pink-500 transition duration-300">Contacto</a>
-            </div>
-            <a href="#contacto" class="hidden md:block bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105">
-                ¡Haz tu pedido!
+{% block content %}
+<main>
+    <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
+        <div class="bg-black/40 p-8 md:p-12 rounded-lg text-center text-white max-w-3xl mx-4 animate-on-scroll">
+            <h1 class="text-5xl md:text-7xl font-bold mb-4">El Sabor de la Felicidad</h1>
+            <p class="text-lg md:text-xl mb-8">Pasteles y postres artesanales hechos con amor y los mejores ingredientes.</p>
+            <a href="#productos" class="bg-white text-pink-600 font-bold px-8 py-3 rounded-full text-lg hover:bg-stone-200 transition duration-300 transform hover:scale-105">
+                Descubre nuestros postres
             </a>
-        </nav>
-    </header>
+        </div>
+    </section>
 
-    <main>
-        <section class="h-screen bg-cover bg-center flex items-center justify-center" style="background-image: url('https://images.pexels.com/photos/1721934/pexels-photo-1721934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');">
-            <div class="bg-black/40 p-8 md:p-12 rounded-lg text-center text-white max-w-3xl mx-4 animate-on-scroll">
-                <h1 class="text-5xl md:text-7xl font-bold mb-4">El Sabor de la Felicidad</h1>
-                <p class="text-lg md:text-xl mb-8">Pasteles y postres artesanales hechos con amor y los mejores ingredientes.</p>
-                <a href="#productos" class="bg-white text-pink-600 font-bold px-8 py-3 rounded-full text-lg hover:bg-stone-200 transition duration-300 transform hover:scale-105">
-                    Descubre nuestros postres
+    <section id="productos" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-slate-800">Nuestros Favoritos</h2>
+                <p class="text-gray-600 mt-2">Los más pedidos por nuestros clientes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 100ms;">
+                    <img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pastel de Chocolate" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Pastel Selva Negra</h3>
+                        <p class="text-gray-600">Capas de bizcocho de chocolate, crema batida y cerezas. Un clásico irresistible.</p>
+                    </div>
+                </div>
+                <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;">
+                    <img src="https://images.pexels.com/photos/1027811/pexels-photo-1027811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Cupcakes variados" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Cupcakes de Vainilla</h3>
+                        <p class="text-gray-600">Suaves y esponjosos, decorados con nuestro frosting especial de mantequilla.</p>
+                    </div>
+                </div>
+                <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;">
+                    <img src="https://images.pexels.com/photos/2144200/pexels-photo-2144200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Cheesecake de fresa" class="w-full h-64 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2">Cheesecake de Fresa</h3>
+                        <p class="text-gray-600">Cremoso y delicioso, sobre una base de galleta y cubierto con fresas frescas.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-12 animate-on-scroll">
+                <a href="{{ url_for('productos') }}"
+                   class="inline-block bg-pink-600 text-white font-bold px-8 py-3 rounded-full text-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-xl shadow-pink-300/50">
+                    Ver Menú Completo 🍰
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="productos" class="py-20 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-slate-800">Nuestros Favoritos</h2>
-                    <p class="text-gray-600 mt-2">Los más pedidos por nuestros clientes.</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 100ms;">
-                        <img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Pastel de Chocolate" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">Pastel Selva Negra</h3>
-                            <p class="text-gray-600">Capas de bizcocho de chocolate, crema batida y cerezas. Un clásico irresistible.</p>
-                        </div>
-                    </div>
-                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 200ms;">
-                        <img src="https://images.pexels.com/photos/1027811/pexels-photo-1027811.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Cupcakes variados" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">Cupcakes de Vainilla</h3>
-                            <p class="text-gray-600">Suaves y esponjosos, decorados con nuestro frosting especial de mantequilla.</p>
-                        </div>
-                    </div>
-                    <div class="bg-stone-50 rounded-lg shadow-lg overflow-hidden transform hover:-translate-y-2 transition-all duration-300 animate-on-scroll" style="transition-delay: 300ms;">
-                        <img src="https://images.pexels.com/photos/2144200/pexels-photo-2144200.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Cheesecake de fresa" class="w-full h-64 object-cover">
-                        <div class="p-6">
-                            <h3 class="text-2xl font-bold mb-2">Cheesecake de Fresa</h3>
-                            <p class="text-gray-600">Cremoso y delicioso, sobre una base de galleta y cubierto con fresas frescas.</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="text-center mt-12 animate-on-scroll">
-                    <a href="{{ url_for('productos') }}"
-                       class="inline-block bg-pink-600 text-white font-bold px-8 py-3 rounded-full text-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-xl shadow-pink-300/50">
-                        Ver Menú Completo 🍰
-                    </a>
-                </div>
-                </div>
-        </section>
-
-        <section id="nosotros" class="py-20 bg-stone-100">
-            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-                <div class="md:w-1/2 animate-on-scroll">
-                    <img src="https://images.pexels.com/photos/3845813/pexels-photo-3845813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Chef pastelero" class="rounded-lg shadow-xl w-full">
-                </div>
-                <div class="md:w-1/2 text-center md:text-left animate-on-scroll" style="transition-delay: 150ms;">
-                    <h2 class="text-4xl font-bold text-slate-800 mb-4">Pasión en cada Bocado</h2>
-                    <p class="text-gray-600 leading-relaxed">
-                        En Dulce Rincón, cada postre es una obra de arte. Nacimos de un sueño familiar: compartir la alegría a través de recetas que han pasado de generación en generación. Usamos solo ingredientes frescos y de la más alta calidad para garantizar que cada bocado sea una experiencia inolvidable.
-                    </p>
-                </div>
+    <section id="nosotros" class="py-20 bg-stone-100">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
+            <div class="md:w-1/2 animate-on-scroll">
+                <img src="https://images.pexels.com/photos/3845813/pexels-photo-3845813.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Chef pastelero" class="rounded-lg shadow-xl w-full">
             </div>
-        </section>
+            <div class="md:w-1/2 text-center md:text-left animate-on-scroll" style="transition-delay: 150ms;">
+                <h2 class="text-4xl font-bold text-slate-800 mb-4">Pasión en cada Bocado</h2>
+                <p class="text-gray-600 leading-relaxed">
+                    En Dulce Rincón, cada postre es una obra de arte. Nacimos de un sueño familiar: compartir la alegría a través de recetas que han pasado de generación en generación. Usamos solo ingredientes frescos y de la más alta calidad para garantizar que cada bocado sea una experiencia inolvidable.
+                </p>
+            </div>
+        </div>
+    </section>
 
-        <section id="contacto" class="py-20 bg-white">
-            <div class="container mx-auto px-6 max-w-2xl text-center">
+    <section id="contacto" class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-2xl text-center">
 
-                <div class="text-center mb-10 animate-on-scroll">
-                    <h2 class="text-4xl font-bold text-slate-800">¿Quieres un descuento personalizado?</h2>
-                    <p class="text-gray-600 mt-2">Dinos un poco de ti para enviarte ofertas exclusivas.</p>
+            <div class="text-center mb-10 animate-on-scroll">
+                <h2 class="text-4xl font-bold text-slate-800">¿Quieres un descuento personalizado?</h2>
+                <p class="text-gray-600 mt-2">Dinos un poco de ti para enviarte ofertas exclusivas.</p>
+            </div>
+
+            <div id="mensaje-respuesta"
+                class="hidden p-4 mb-6 text-lg font-medium text-green-700 bg-green-100 rounded-lg shadow-lg"
+                role="alert">
+            </div>
+
+            <div id="boton-mostrar-form" class="animate-on-scroll">
+                <button id="btn-mostrar"
+                        class="bg-pink-600 text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-xl shadow-pink-300/50">
+                    ¡Quiero mi formulario de preferencias!
+                </button>
+            </div>
+
+            <form action="{{ url_for('manejar_formulario') }}" method="POST"
+                    id="formulario-oculto"
+                    class="bg-stone-50 p-8 md:p-12 rounded-xl shadow-2xl space-y-6 border border-pink-200 mt-8 hidden animate-on-scroll"
+                    style="transition-delay: 150ms;">
+
+                <p class="text-left text-lg font-semibold text-pink-700 mb-6">Completa estos datos y ¡listo!</p>
+
+                <div class="animate-on-scroll" style="transition-delay: 200ms;">
+                    <label for="nombre" class="block text-left text-base font-medium text-gray-700 mb-1">Tu Nombre Completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana María Rojas" required
+                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
                 </div>
 
-                <div id="mensaje-respuesta"
-                     class="hidden p-4 mb-6 text-lg font-medium text-green-700 bg-green-100 rounded-lg shadow-lg"
-                     role="alert">
-                    </div>
+                <div class="animate-on-scroll" style="transition-delay: 300ms;">
+                    <label for="email" class="block text-left text-base font-medium text-gray-700 mb-1">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="para recibir tus ofertas exclusivas" required
+                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
+                </div>
 
-                <div id="boton-mostrar-form" class="animate-on-scroll">
-                    <button id="btn-mostrar"
-                            class="bg-pink-600 text-white font-bold px-10 py-4 rounded-full text-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-xl shadow-pink-300/50">
-                        ¡Quiero mi formulario de preferencias!
+                <div class="animate-on-scroll" style="transition-delay: 400ms;">
+                    <label for="preferencia" class="block text-left text-base font-medium text-gray-700 mb-1">¿Cuál es tu postre favorito?</label>
+                    <select id="preferencia" name="preferencia" required
+                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white appearance-none pr-8">
+                        <option value="">Selecciona una opción...</option>
+                        <option value="chocolate">Chocolate 🍫</option>
+                        <option value="frutas">Frutas / Cítricos 🍓🍋</option>
+                        <option value="vainilla">Vainilla / Cremosos 🍦</option>
+                        <option value="especiales">Sabores Exóticos / Especias ✨</option>
+                    </select>
+                </div>
+
+                <div class="animate-on-scroll text-left" style="transition-delay: 500ms;">
+                    <label class="block text-base font-medium text-gray-700 mb-2">¿Para qué ocasión sueles comprar?</label>
+                    <div class="space-y-2">
+                        <label class="flex items-center">
+                            <input type="radio" name="ocasion" value="cumpleanos" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150" required>
+                            <span class="ml-2 text-gray-700">Cumpleaños/Fiestas 🎉</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ocasion" value="regalo" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150">
+                            <span class="ml-2 text-gray-700">Regalo/Detalle 🎁</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="ocasion" value="antojo" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150">
+                            <span class="ml-2 text-gray-700">Un Antojo Diario ☕</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="pt-4 text-center animate-on-scroll" style="transition-delay: 600ms;">
+                    <button type="submit"
+                            class="w-full bg-pink-600 text-white font-bold py-3 rounded-lg text-xl hover:bg-pink-700 transition duration-300 transform hover:scale-[1.02] shadow-lg shadow-pink-200/50 focus:outline-none focus:ring-4 focus:ring-pink-300">
+                        ¡Enviar y Obtener mi Descuento!
                     </button>
                 </div>
+                <p class="mt-6 text-center text-sm text-gray-500">Tus datos están seguros con nosotros. 🔒</p>
+            </form>
 
-                <form action="{{ url_for('manejar_formulario') }}" method="POST"
-                      id="formulario-oculto"
-                      class="bg-stone-50 p-8 md:p-12 rounded-xl shadow-2xl space-y-6 border border-pink-200 mt-8 hidden animate-on-scroll"
-                      style="transition-delay: 150ms;">
+            <p class="mt-8 text-center text-gray-500">¿Necesitas hablar con nosotros? Llámanos al: **(51) 987 654 321**</p>
 
-                    <p class="text-left text-lg font-semibold text-pink-700 mb-6">Completa estos datos y ¡listo!</p>
-
-                    <div class="animate-on-scroll" style="transition-delay: 200ms;">
-                        <label for="nombre" class="block text-left text-base font-medium text-gray-700 mb-1">Tu Nombre Completo</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Ana María Rojas" required
-                               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
-                    </div>
-
-                    <div class="animate-on-scroll" style="transition-delay: 300ms;">
-                        <label for="email" class="block text-left text-base font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" placeholder="para recibir tus ofertas exclusivas" required
-                               class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white">
-                    </div>
-
-                    <div class="animate-on-scroll" style="transition-delay: 400ms;">
-                        <label for="preferencia" class="block text-left text-base font-medium text-gray-700 mb-1">¿Cuál es tu postre favorito?</label>
-                        <select id="preferencia" name="preferencia" required
-                                     class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-pink-500 focus:border-pink-500 transition duration-300 transform focus:scale-[1.01] bg-white appearance-none pr-8">
-                            <option value="">Selecciona una opción...</option>
-                            <option value="chocolate">Chocolate 🍫</option>
-                            <option value="frutas">Frutas / Cítricos 🍓🍋</option>
-                            <option value="vainilla">Vainilla / Cremosos 🍦</option>
-                            <option value="especiales">Sabores Exóticos / Especias ✨</option>
-                        </select>
-                    </div>
-
-                    <div class="animate-on-scroll text-left" style="transition-delay: 500ms;">
-                        <label class="block text-base font-medium text-gray-700 mb-2">¿Para qué ocasión sueles comprar?</label>
-                        <div class="space-y-2">
-                            <label class="flex items-center">
-                                <input type="radio" name="ocasion" value="cumpleanos" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150" required>
-                                <span class="ml-2 text-gray-700">Cumpleaños/Fiestas 🎉</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="ocasion" value="regalo" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150">
-                                <span class="ml-2 text-gray-700">Regalo/Detalle 🎁</span>
-                            </label>
-                            <label class="flex items-center">
-                                <input type="radio" name="ocasion" value="antojo" class="form-radio h-5 w-5 text-pink-600 focus:ring-pink-500 transition duration-150">
-                                <span class="ml-2 text-gray-700">Un Antojo Diario ☕</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="pt-4 text-center animate-on-scroll" style="transition-delay: 600ms;">
-                        <button type="submit"
-                                 class="w-full bg-pink-600 text-white font-bold py-3 rounded-lg text-xl hover:bg-pink-700 transition duration-300 transform hover:scale-[1.02] shadow-lg shadow-pink-200/50 focus:outline-none focus:ring-4 focus:ring-pink-300">
-                            ¡Enviar y Obtener mi Descuento!
-                        </button>
-                    </div>
-
-                    <p class="mt-6 text-center text-sm text-gray-500">Tus datos están seguros con nosotros. 🔒</p>
-
-                </form>
-
-                <p class="mt-8 text-center text-gray-500">¿Necesitas hablar con nosotros? Llámanos al: **(51) 987 654 321**</p>
-
-            </div>
-        </section>
-        </main>
-
-    <footer class="bg-slate-800 text-white py-8">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2025 Pastelería Dulce Rincón. Todos los derechos reservados.</p>
-            <p class="text-sm text-slate-400 mt-2">Diseñado con amor y mucho azúcar.</p>
         </div>
-    </footer>
-
-    <script>
-        const FORM_URL = "{{ url_for('manejar_formulario') }}"; 
-    </script>
-
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-</body>
-</html>
+    </section>
+</main>
+{% endblock %}
