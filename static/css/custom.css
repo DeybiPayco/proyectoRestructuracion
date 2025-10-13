@@ -1,0 +1,19 @@
+/* Agregamos las tipografías personalizadas a Tailwind  */
+body {
+    font-family: 'Inter', sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Estilos para las animaciones al hacer scroll */
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
