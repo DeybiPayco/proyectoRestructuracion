@@ -4,6 +4,6 @@
 db_config = {
     'host': 'localhost',
     'user': 'root',      # <-- CAMBIA ESTO por tu usuario (ej. 'root')
-    'password': 'Acamila12345678-2',   
+    'password': 'admin',   
     'database': 'pasteleria_db'     # El nombre de la base de datos que creamos
 }

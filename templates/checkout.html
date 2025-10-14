@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Confirmar Pedido{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+    <div class="container mx-auto max-w-4xl px-6">
+        <h1 class="text-3xl font-bold text-center text-slate-800 mb-8" style="font-family: 'Playfair Display', serif;">Confirmar Pedido</h1>
+        <div class="bg-stone-50 border rounded-lg p-8">
+            <h2 class="text-2xl font-semibold mb-6 border-b pb-4">Resumen de tu Compra</h2>
+            
+            <div class="space-y-4 mb-6">
+                {% for item in cart_items %}
+                <div class="flex justify-between items-center text-gray-700">
+                    <span>{{ item.nombre }} (x{{ item.cantidad }})</span>
+                    <span class="font-medium">S/ {{ "%.2f"|format(item.precio * item.cantidad) }}</span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="border-t-2 border-dashed pt-4">
+                <div class="flex justify-between items-center font-bold text-xl text-slate-800">
+                    <span>Total a Pagar</span>
+                    <span>S/ {{ "%.2f"|format(total_price) }}</span>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <p class="text-gray-600 mb-6">Al hacer clic en "Confirmar Pedido", tu compra será procesada.</p>
+                <form action="{{ url_for('place_order') }}" method="POST">
+                    <button type="submit" class="w-full max-w-md mx-auto bg-pink-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-pink-700 transition duration-300">
+                        Confirmar Pedido y Pagar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
