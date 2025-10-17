@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}{{ post.titulo }} - Dulce Rincón{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+    <div class="container mx-auto max-w-3xl px-6">
+        <div class="bg-stone-50 rounded-xl shadow-lg border border-pink-200 overflow-hidden animate-on-scroll">
+            <img src="{{ post.imagen_url }}" alt="{{ post.titulo }}" class="w-full h-64 object-cover">
+            <div class="p-8 space-y-6">
+                <h1 class="text-3xl font-bold text-pink-600" style="font-family: 'Playfair Display', serif;">{{ post.titulo }}</h1>
+                <p class="text-sm text-gray-500">{{ post.fecha }}</p>
+
+                {% if post.id == 1 %}
+                <p class="text-gray-700 leading-relaxed text-base">
+                    San Valentín es la ocasión perfecta para celebrar el amor con detalles dulces y personalizados. En Dulce Rincón, hemos preparado una colección romántica que incluye tortas de chocolate con fresas, cupcakes decorados con corazones y cajas de regalo que derriten el alma. ¡Haz que tu San Valentín sea inolvidable!
+                </p>
+                {% elif post.id == 2 %}
+                <p class="text-gray-700 leading-relaxed text-base">
+                    La Navidad en Dolce Rincon es pura magia. Cada pastel, cada galleta y cada cupcake está 
+                    hecho con amor y tradición. Este año, nuestra colección navideña incluye sabores clásicos
+                     como panetón artesanal, tortas de frutos secos y decoraciones que llenan de alegría cualquier mesa familiar.
+                </p>
+                {% elif post.id == 3 %}
+                <p class="text-gray-700 leading-relaxed text-base">
+                    ¡24 años endulzando corazones! En este aniversario celebramos nuestra historia, 
+                    Han pasado 24 años de recetas, aromas y sonrisas que se han convertido en parte de nuestra historia.
+                    Cada pastel, cada galleta y cada postre ha sido elaborado con amor, dedicación y el deseo de hacer de cada ocasión un instante inolvidable.
+                    A lo largo de este dulce recorrido, hemos crecido gracias a ustedes: nuestros clientes, amigos y familia pastelera. Son su confianza, 
+                    sus celebraciones y sus recuerdos los que nos inspiran a seguir mejorando, innovando y creando nuevas formas de 
+                    endulzar sus vidas.
+                </p>
+                {% endif %}
+
+                <div class="pt-6">
+                    <a href="{{ url_for('blog') }}" class="inline-block bg-pink-500 text-white font-bold px-6 py-2 rounded-full hover:bg-pink-600 transition duration-300 transform hover:scale-105 shadow-md shadow-pink-400/50">
+                        ← Volver al Blog
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>
+{% endblock %}

@@ -10,7 +10,10 @@
                 <div class="space-y-4">
                 {% for item in cart_items %}
                     <div class="flex items-center bg-stone-50 p-4 rounded-lg shadow-sm border border-stone-200">
-                        <img src="{{ item.imagen_url }}" alt="{{ item.nombre }}" class="w-24 h-24 rounded-md object-cover">
+                        <!-- Imagen del producto con tamaño corregido -->
+                        <img src="{{ item.imagen_url }}" alt="{{ item.nombre }}"
+                             class="rounded-md object-cover shadow-sm border border-violet-200"
+                             style="width: 80px !important; height: 80px !important; object-fit: cover !important;">
                         <div class="flex-grow ml-4">
                             <h2 class="font-bold text-lg text-slate-800">{{ item.nombre }}</h2>
                             <p class="text-sm text-gray-500">Precio: S/ {{ "%.2f"|format(item.precio) }}</p>
@@ -22,7 +25,9 @@
                             </form>
                             <span class="font-bold w-20 md:w-24 text-right">S/ {{ "%.2f"|format(item.precio * item.cantidad) }}</span>
                             <form action="{{ url_for('remove_from_cart', product_id=item.producto_id) }}" method="POST">
-                                <button type="submit" class="text-gray-400 hover:text-red-600 transition duration-200 p-1 rounded-full"><ion-icon name="trash-outline" class="h-6 w-6"></ion-icon></button>
+                                <button type="submit" class="text-gray-400 hover:text-red-600 transition duration-200 p-1 rounded-full">
+                                    <ion-icon name="trash-outline" class="h-6 w-6"></ion-icon>
+                                </button>
                             </form>
                         </div>
                     </div>

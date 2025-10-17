@@ -433,6 +433,71 @@ def place_order():
         cursor.close()
         conn.close()
 
+@app.route('/blog')
+def blog():
+    blog_posts = [
+        {
+            "id": 1,
+            "titulo": "Dulce Amor: Las Novedades Más Románticas para San Valentín 2025",
+            "fecha": "2025-02-05",
+            "descripcion": "San Valentín es la ocasión perfecta para celebrar el amor...",
+            "imagen_url": "/static/img/san_valentin.jpg"
+        },
+        {
+            "id": 2,
+            "titulo": "Celebra la Magia de la Navidad con Dulce Rincón",
+            "fecha": "2024-12-11",
+            "descripcion": "En Dolce Capriccio, siempre buscamos transmitir esa esencia familiar en cada...",
+            "imagen_url": "/static/img/navidad.jpg"
+        },
+        {
+            "id": 3,
+            "titulo": "Dulce Rincón: 24 Años Endulzando Corazones",
+            "fecha": "2024-09-01",
+            "descripcion": "Nuestra historia comenzó en el corazón de un espacio en Miraflores...",
+            "imagen_url": "/static/img/aniversario.jpg"
+        }
+    ]
+    return render_template('blog.html', blog_posts=blog_posts)
+
+@app.route('/blog/<int:blog_id>')
+def ver_blog(blog_id):
+    blog_posts = [
+        {
+            "id": 1,
+            "titulo": "Dulce Amor: Las Novedades Más Románticas para San Valentín 2025",
+            "fecha": "2025-02-05",
+            "imagen_url": "/static/img/san_valentin.jpg"
+        },
+        {
+            "id": 2,
+            "titulo": "Celebra la Magia de la Navidad con Dulce Rincon",
+            "fecha": "2024-12-11",
+            "imagen_url": "/static/img/navidad.jpg"
+        },
+        {
+            "id": 3,
+            "titulo": "Dulce Rincon: 24 Años Endulzando Corazones",
+            "fecha": "2024-09-01",
+            "imagen_url": "/static/img/aniversario.jpg"
+        }
+    ]
+
+    post = next((p for p in blog_posts if p["id"] == blog_id), None)
+    if not post:
+        flash("Entrada de blog no encontrada.", "danger")
+        return redirect(url_for('blog'))
+
+    return render_template('ver_blog.html', post=post)
+
+
+    post = next((p for p in blog_posts if p["id"] == blog_id), None)
+    if not post:
+        flash("Entrada de blog no encontrada.", "danger")
+        return redirect(url_for('blog'))
+
+    return render_template('ver_blog.html', post=post)
+
 @app.route('/mis_pedidos')
 @login_required
 def mis_pedidos():
@@ -445,8 +510,6 @@ def mis_pedidos():
     cursor.close()
     conn.close()
     return render_template('mis_pedidos.html', pedidos=lista_de_pedidos)
-
-# ##### FIN: RUTAS DEL PROCESO DE CHECKOUT Y PEDIDOS #####
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Blog - Dulce Rincón{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+    <div class="container mx-auto px-6">
+        <h1 class="text-4xl font-bold text-center text-pink-600 mb-12 animate-on-scroll" style="font-family: 'Playfair Display', serif;">Nuestro Blog</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {% for post in blog_posts %}
+            <div class="bg-stone-50 rounded-xl shadow-md border border-pink-200 overflow-hidden transform transition duration-500 hover:scale-[1.02] animate-on-scroll">
+                <img src="{{ post.imagen_url }}" alt="{{ post.titulo }}" class="w-full h-48 object-cover">
+                <div class="p-6 space-y-4">
+                    <h2 class="text-xl font-bold text-slate-800">{{ post.titulo }}</h2>
+                    <p class="text-sm text-gray-500">{{ post.fecha }}</p>
+                    <p class="text-gray-700 text-sm leading-relaxed">{{ post.descripcion }}</p>
+                    <a href="{{ url_for('ver_blog', blog_id=post.id) }}" class="inline-block text-pink-600 font-semibold text-sm hover:underline transition duration-300">SEGUIR LEYENDO</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+</script>
+{% endblock %}
