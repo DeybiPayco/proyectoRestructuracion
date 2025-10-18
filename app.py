@@ -10,8 +10,6 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_bcrypt import Bcrypt
 from functools import wraps
 from flask import abort
-# ##### FIN: Nuevos imports #####
-
 
 app = Flask(__name__)
 
@@ -25,7 +23,7 @@ login_manager.login_message_category = 'info'
 # ##### FIN: Configuración #####
 
 
-# ##### INICIO: Modelo de Usuario y cargador para Flask-Login #####
+# ## INICIO: Modelo de Usuario y cargador para Flask-Login ##
 class User(UserMixin):
     def __init__(self, id, nombre, email, rol):
         self.id = id
@@ -497,6 +495,11 @@ def ver_blog(blog_id):
         return redirect(url_for('blog'))
 
     return render_template('ver_blog.html', post=post)
+
+@app.route('/personalizar')
+def personalizar():
+    return render_template('personalizar.html')
+
 
 @app.route('/mis_pedidos')
 @login_required

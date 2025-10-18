@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Juego de Memoria Pastelera - Dulce Rincón{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+  <div class="container mx-auto px-6 text-center space-y-8">
+    <h1 class="text-4xl font-bold text-pink-600 animate-on-scroll" style="font-family: 'Playfair Display', serif;">
+      🧠 Juego de Memoria Pastelera
+    </h1>
+    <p class="text-gray-600 text-lg animate-on-scroll">
+      Encuentra las 8 parejas antes de que se acabe el tiempo y gana un 10% de descuento encantado 💖
+    </p>
+
+    <!-- Botón de iniciar juego -->
+    <button id="iniciar"
+            class="mt-6 bg-pink-500 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-600 transition animate-on-scroll shadow-xl"
+            style="animation: pulse-shadow 1.5s infinite;">
+      ▶️ Iniciar Juego
+    </button>
+
+    <!-- Temporizador -->
+    <div id="temporizador" class="text-xl font-semibold text-pink-700 animate-on-scroll hidden">
+      Tiempo restante: <span id="tiempo">30</span> segundos
+    </div>
+
+    <!-- Tablero en cuadrícula 4x4 -->
+    <div class="flex justify-center mt-6 animate-on-scroll">
+      <div id="tablero"
+           class="grid grid-cols-4 gap-4"
+           style="width: 340px;">
+        <!-- Tarjetas se generan dinámicamente -->
+      </div>
+    </div>
+
+    <!-- Mensaje final -->
+    <div id="mensaje-final"
+         class="mt-8 text-xl font-bold text-white bg-pink-500 px-6 py-4 rounded-xl shadow-lg transition duration-300 animate-on-scroll hidden">
+    </div>
+
+    <!-- Botón reiniciar -->
+    <button id="reiniciar"
+            class="mt-6 bg-pink-500 text-white font-bold px-6 py-3 rounded-full hover:bg-pink-600 transition animate-on-scroll shadow-xl hidden"
+            style="animation: pulse-shadow 1.5s infinite;">
+      🔄 Volver a jugar
+    </button>
+  </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/personalizar.js') }}"></script>
+{% endblock %}

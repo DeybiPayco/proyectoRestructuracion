@@ -48,9 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cambia cada 5 segundos (5000 ms).
         setInterval(nextCarouselItem, 5000); 
     }
-    // ----------------------------------------------------
-
-
+   
     // CÓDIGO EXISTENTE: Lógica del Formulario
     // ----------------------------------------------------------------
     
