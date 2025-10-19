@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}Confirmar Pedido{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+    <div class="container mx-auto max-w-5xl px-6">
+        <h1 class="text-3xl font-bold text-center text-slate-800 mb-10" style="font-family: 'Playfair Display', serif;">Confirmar Pedido</h1>
+        <form action="{{ url_for('place_order') }}" method="POST" class="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-stone-50 p-8 rounded-xl shadow-md border border-pink-200">
+            
+            <!-- 🧁 Datos del Cliente -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-pink-700 border-b pb-2">Detalles de Facturación</h2>
+                <div>
+                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombres Completos*</label>
+                    <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="apellido" class="block text-sm font-medium text-gray-700">Apellidos Completos*</label>
+                    <input type="text" id="apellido" name="apellido" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono*</label>
+                    <input type="text" id="telefono" name="telefono" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Correo Electrónico*</label>
+                    <input type="email" id="email" name="email" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección*</label>
+                    <input type="text" id="direccion" name="direccion" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="dni" class="block text-sm font-medium text-gray-700">DNI / RUC*</label>
+                    <input type="text" id="dni" name="dni" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                </div>
+                <div>
+                    <label for="notas" class="block text-sm font-medium text-gray-700">Notas para el pedido (recomendaciones y horarios)</label>
+                    <textarea id="notas" name="notas" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500" placeholder="Ej. Dedicatoria, colores, sabores..."></textarea>
+                </div>
+            </div>
+
+            <!-- 🍰 Resumen del Pedido -->
+            <div class="space-y-6">
+                <h2 class="text-xl font-bold text-pink-700 border-b pb-2">Resumen de tu Pedido</h2>
+                <div class="space-y-4">
+                    {% for item in cart_items %}
+                    <div class="flex justify-between text-gray-700">
+                        <span>{{ item.nombre }} (x{{ item.cantidad }})</span>
+                        <span class="font-medium">S/ {{ "%.2f"|format(item.precio * item.cantidad) }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="mt-6">
+                    <label for="envio" class="block text-sm font-medium text-gray-700">Tipo de Entrega*</label>
+                    <select id="envio" name="envio" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                        <option value="">Selecciona una opción</option>
+                        <option value="recojo">Recoger en tienda</option>
+                        <option value="envio">Delivery</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="metodo_pago" class="block text-sm font-medium text-gray-700">Método de Pago*</label>
+                    <select id="metodo_pago" name="metodo_pago" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-pink-500 focus:border-pink-500">
+                        <option value="">Selecciona una opción</option>
+                        <option value="yape">Yape</option>
+                        <option value="plin">Plin</option>
+                        <option value="efectivo">Efectivo</option>
+                    </select>
+                </div>
+
+                <div class="border-t-2 border-dashed pt-4 mt-4">
+                    <div class="flex justify-between font-bold text-xl text-slate-800">
+                        <span>Total a Pagar</span>
+                        <span>S/ {{ "%.2f"|format(total_price) }}</span>
+                    </div>
+                </div>
+
+                <div class="mt-6">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" required class="rounded text-pink-600 focus:ring-pink-500">
+                        <span class="ml-2 text-sm text-gray-600">Acepto los términos y condiciones</span>
+                    </label>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button type="submit" class="w-full bg-pink-600 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-pink-700 transition duration-300 shadow-lg shadow-pink-400/50">
+                        REALIZAR EL PEDIDO
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

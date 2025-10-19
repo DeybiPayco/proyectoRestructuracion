@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {% if modo == 'edit' %}Editar Producto{% else %}Añadir Producto{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto max-w-2xl px-6 py-12">
+    <h1 class="text-3xl font-bold text-slate-800 mb-8 text-center">
+        {% if modo == 'edit' %}Editar Producto{% else %}Añadir Nuevo Producto{% endif %}
+    </h1>
+
+    <div class="bg-white p-8 rounded-lg shadow-lg border border-stone-200">
+        <form method="POST" action="{% if modo == 'edit' %}{{ url_for('edit_product', id=producto.id) }}{% else %}{{ url_for('add_product') }}{% endif %}" class="space-y-6">
+            
+            <div>
+                <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del Producto</label>
+                <input type="text" name="nombre" id="nombre" required value="{{ producto.nombre if producto }}"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+            </div>
+
+            <div>
+                <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                <textarea name="descripcion" id="descripcion" rows="4" required
+                          class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">{{ producto.descripcion if producto }}</textarea>
+            </div>
+
+            <div>
+                <label for="precio" class="block text-sm font-medium text-gray-700">Precio (ej. 45.50)</label>
+                <input type="number" step="0.01" name="precio" id="precio" required value="{{ producto.precio if producto }}"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+            </div>
+
+            <div>
+                <label for="imagen_url" class="block text-sm font-medium text-gray-700">URL de la Imagen</label>
+                <input type="text" name="imagen_url" id="imagen_url" required value="{{ producto.imagen_url if producto }}"
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-pink-500 focus:border-pink-500">
+            </div>
+
+            <div class="flex items-center justify-end space-x-4 pt-4">
+                <a href="{{ url_for('dashboard_admin') }}" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300">Cancelar</a>
+                <button type="submit" class="bg-pink-600 text-white font-bold px-4 py-2 rounded-md hover:bg-pink-700">
+                    {% if modo == 'edit' %}Guardar Cambios{% else %}Crear Producto{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
