@@ -500,6 +500,9 @@ def ver_blog(blog_id):
 def personalizar():
     return render_template('personalizar.html')
 
+@app.route('/chatconsulta')
+def chatconsulta():
+    return render_template('chatconsulta.html')
 
 @app.route('/mis_pedidos')
 @login_required

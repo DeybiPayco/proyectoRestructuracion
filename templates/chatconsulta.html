@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Consultas Pasteleras - Dulce Rincón{% endblock %}
+{% block content %}
+<div class="bg-white py-12">
+  <div class="container mx-auto px-6 text-center space-y-8">
+    <h1 class="text-4xl font-bold text-pink-600 animate-on-scroll" style="font-family: 'Playfair Display', serif;">
+      💬 Consultas Pasteleras
+    </h1>
+    <p class="text-gray-600 text-lg animate-on-scroll">
+      ¿Tienes dudas sobre nuestros productos, horarios o entregas? ¡Estamos aquí para ayudarte con dulzura! 🧁
+    </p>
+
+    <!-- Contenedor del chatbot -->
+    <div id="chatbot-container"
+         class="mx-auto mt-8 w-80 max-w-full bg-white rounded-2xl shadow-2xl border border-pink-200 overflow-hidden flex flex-col"
+         style="font-family: 'Inter', sans-serif;">
+
+      <!-- Encabezado del chat -->
+      <div class="bg-pink-500 text-white px-4 py-3 flex justify-between items-center">
+        <h2 class="text-lg font-bold">Chat Pastelero 💬</h2>
+        <button id="cerrar-chat" class="text-white hover:text-pink-100 text-xl font-bold">&times;</button>
+      </div>
+
+      <!-- Área de mensajes -->
+      <div id="chat-mensajes"
+           class="flex-1 px-4 py-3 space-y-2 overflow-y-auto bg-pink-50"
+           style="max-height: 300px;">
+        <!-- Aquí se mostrarán los mensajes -->
+      </div>
+
+      <!-- Área de entrada -->
+      <div class="px-4 py-3 bg-white border-t border-pink-200 flex items-center space-x-2">
+        <input type="text"
+               id="chat-input"
+               placeholder="Escribe tu duda aquí..."
+               class="flex-1 px-3 py-2 rounded-xl border border-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-400 text-sm" />
+        <button id="enviar-chat"
+                class="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition text-sm font-semibold">
+          Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cerrarBtn = document.getElementById("cerrar-chat");
+  cerrarBtn.addEventListener("click", () => {
+    document.getElementById("chatbot-container").style.display = "none";
+  });
+</script>
+{% endblock %}
