@@ -3,34 +3,54 @@ document.addEventListener("DOMContentLoaded", () => {
   const cerrarBtn = document.getElementById("cerrar-chat");
 
   const respuestas = {
-    "🕒 ¿Cuál es el horario de atención?": "Atendemos de lunes a sábado, de 9:00 a.m. a 7:00 p.m. 🕒",
-    "📍 ¿Dónde se ubican?": "Estamos en Av. Principal 123, Ventanilla, Callao 📍",
-    "💸 ¿Cuál es el pastel más caro?": "Nuestro pastel más exclusivo es el 'Encanto de Frambuesa Real' 🎂, cuesta S/ 120.",
-    "🎂 ¿Qué pastel recomiendan?": "Para cumpleaños, recomendamos el 'Sueño de Vainilla con fresas' 🍓🎉",
-    "🚚 ¿Hacen entregas?": "Sí, hacemos entregas en todo Callao y Lima Norte 🚚"
+    horario: "Atendemos de lunes a sábado, de 9:00 a.m. a 7:00 p.m. 🕒",
+    ubicacion: "Estamos San vicente cañete 📍",
+    caro: "Nuestro pastel más exclusivo es el 'Encanto de Frambuesa Real' 🎂, cuesta S/ 120.",
+    recomendacion: "Para cumpleaños, recomendamos el 'Sueño de Vainilla con fresas' 🍓🎉",
+    entregas: "Sí, hacemos entregas en todo San vicente, Imperial 🚚",
+    promociones: "¡Sí! Si juegas el juego de memoria, puedes ganar un 10% de descuento 🎮✨",
+    personalizados: "Claro que sí, puedes personalizar tu pastel desde la sección 'Haz tu pedido' 🎂🖌️"
   };
 
   document.querySelectorAll(".opcion-chat").forEach(btn => {
     btn.addEventListener("click", () => {
-      const pregunta = btn.textContent.trim();
-      mostrarMensaje("usuario", pregunta);
+      const clave = btn.dataset.pregunta;
+      const preguntaVisible = btn.textContent.trim();
+      mostrarMensaje("usuario", preguntaVisible);
+      mostrarEscribiendo();
+
       setTimeout(() => {
-        mostrarMensaje("bot", respuestas[pregunta] || "Lo siento, no entendí esa consulta 😔");
-      }, 500);
+        eliminarEscribiendo();
+        mostrarMensaje("bot", respuestas[clave] || "Lo siento, no entendí esa consulta 😔");
+      }, 1000);
     });
   });
 
   cerrarBtn.addEventListener("click", () => {
-    document.getElementById("chatbot-container").style.display = "none";
+    mensajes.innerHTML = "";
   });
 
   function mostrarMensaje(tipo, texto) {
     const burbuja = document.createElement("div");
     burbuja.className = tipo === "usuario"
-      ? "bg-pink-200 text-pink-900 px-4 py-2 rounded-xl text-left text-sm font-medium w-fit self-end"
-      : "bg-white border border-pink-300 text-pink-800 px-4 py-2 rounded-xl text-left text-sm font-medium w-fit self-start shadow";
+      ? "bg-pink-300 text-purple-900 px-4 py-2 rounded-xl text-left text-sm font-medium w-fit self-end shadow-md"
+      : "bg-purple-200 border border-pink-300 text-purple-900 px-4 py-2 rounded-xl text-left text-sm font-medium w-fit self-start shadow-md";
     burbuja.textContent = texto;
     mensajes.appendChild(burbuja);
     mensajes.scrollTop = mensajes.scrollHeight;
+  }
+
+  function mostrarEscribiendo() {
+    const escribiendo = document.createElement("div");
+    escribiendo.id = "escribiendo";
+    escribiendo.className = "text-sm text-purple-500 italic";
+    escribiendo.textContent = "Escribiendo...";
+    mensajes.appendChild(escribiendo);
+    mensajes.scrollTop = mensajes.scrollHeight;
+  }
+
+  function eliminarEscribiendo() {
+    const burbuja = document.getElementById("escribiendo");
+    if (burbuja) burbuja.remove();
   }
 });
