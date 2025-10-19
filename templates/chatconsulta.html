@@ -3,10 +3,10 @@
 {% block content %}
 <div class="bg-white py-12">
   <div class="container mx-auto px-6 text-center space-y-8">
-    <h1 class="text-4xl font-bold text-pink-600 animate-on-scroll" style="font-family: 'Playfair Display', serif;">
+    <h1 class="text-4xl font-bold text-pink-600" style="font-family: 'Playfair Display', serif;">
       💬 Consultas Pasteleras
     </h1>
-    <p class="text-gray-600 text-lg animate-on-scroll">
+    <p class="text-gray-600 text-lg">
       ¿Tienes dudas sobre nuestros productos, horarios o entregas? ¡Estamos aquí para ayudarte con dulzura! 🧁
     </p>
 
@@ -28,25 +28,30 @@
         <!-- Aquí se mostrarán los mensajes -->
       </div>
 
-      <!-- Área de entrada -->
-      <div class="px-4 py-3 bg-white border-t border-pink-200 flex items-center space-x-2">
-        <input type="text"
-               id="chat-input"
-               placeholder="Escribe tu duda aquí..."
-               class="flex-1 px-3 py-2 rounded-xl border border-pink-300 focus:outline-none focus:ring-2 focus:ring-pink-400 text-sm" />
-        <button id="enviar-chat"
-                class="bg-pink-500 text-white px-4 py-2 rounded-xl hover:bg-pink-600 transition text-sm font-semibold">
-          Enviar
-        </button>
+      <!-- Área de opciones -->
+      <div class="px-4 py-3 bg-white border-t border-pink-200 space-y-2">
+        <p class="text-sm text-pink-600 font-semibold mb-2">Selecciona una consulta:</p>
+        <div class="grid grid-cols-1 gap-2">
+          <button class="opcion-chat bg-pink-100 text-pink-800 px-4 py-2 rounded-xl hover:bg-pink-200 text-sm font-medium">
+            🕒 ¿Cuál es el horario de atención?
+          </button>
+          <button class="opcion-chat bg-pink-100 text-pink-800 px-4 py-2 rounded-xl hover:bg-pink-200 text-sm font-medium">
+            📍 ¿Dónde se ubican?
+          </button>
+          <button class="opcion-chat bg-pink-100 text-pink-800 px-4 py-2 rounded-xl hover:bg-pink-200 text-sm font-medium">
+            💸 ¿Cuál es el pastel más caro?
+          </button>
+          <button class="opcion-chat bg-pink-100 text-pink-800 px-4 py-2 rounded-xl hover:bg-pink-200 text-sm font-medium">
+            🎂 ¿Qué pastel recomiendan?
+          </button>
+          <button class="opcion-chat bg-pink-100 text-pink-800 px-4 py-2 rounded-xl hover:bg-pink-200 text-sm font-medium">
+            🚚 ¿Hacen entregas?
+          </button>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  const cerrarBtn = document.getElementById("cerrar-chat");
-  cerrarBtn.addEventListener("click", () => {
-    document.getElementById("chatbot-container").style.display = "none";
-  });
-</script>
+<script src="{{ url_for('static', filename='js/chatconsulta.js') }}"></script>
 {% endblock %}
